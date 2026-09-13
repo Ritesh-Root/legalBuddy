@@ -1,0 +1,4 @@
+Contact: https://github.com/Ritesh-Root/legalBuddy/security/advisories/new
+Expires: 2027-09-13T00:00:00.000Z
+Preferred-Languages: en
+Policy: https://github.com/Ritesh-Root/legalBuddy/blob/main/SECURITY.md

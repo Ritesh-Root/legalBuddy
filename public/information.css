@@ -1,0 +1,40 @@
+/* Static information pages remain readable with no scripts or third-party requests. */
+body {
+  font-family: system-ui, sans-serif;
+  color: #2c4435;
+  background: #fcfcf9;
+  margin: 0;
+  line-height: 1.8;
+}
+main {
+  max-width: 680px;
+  padding: 50px 25px 80px;
+  margin: auto;
+}
+a {
+  color: #245440;
+  text-underline-offset: 4px;
+}
+a:focus-visible {
+  outline: 3px solid #46724a;
+  outline-offset: 5px;
+}
+h1 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(42px, 7vw, 65px);
+  line-height: 1.15;
+}
+h2 {
+  font-size: 21px;
+  margin-top: 35px;
+}
+p {
+  color: #52664e;
+  font-size: 15px;
+}
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-top: 50px;
+}

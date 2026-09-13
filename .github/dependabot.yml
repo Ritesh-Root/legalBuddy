@@ -1,0 +1,8 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    # Event rule: keep exactly one branch; alerts remain enabled without bot PRs.
+    open-pull-requests-limit: 0

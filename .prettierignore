@@ -1,0 +1,8 @@
+node_modules
+dist
+coverage
+.vercel
+playwright-report
+test-results
+artifacts
+package-lock.json

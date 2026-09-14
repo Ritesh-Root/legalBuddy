@@ -16,6 +16,8 @@ Zod validates model output and a second check matches each quotation to the corr
 
 Text-based PDFs are parsed lazily on the client. Uploading a file never sends the binary to a third party. Analysis begins only after consent and sends extracted text to Gemini. Scans, encrypted files, large files, and unreadable input receive clear limits rather than silently losing pages. No cross-user cache is used because preserving private document boundaries is more important than reusing responses.
 
+Within one workspace, a bounded in-memory cache reuses identical successful requests for five minutes. Every input field participates in the key, and resetting the workspace invalidates pending cache writes. This removes redundant inference without retaining legal documents in a shared service. Only completed results are cached; sharing in-flight promises would couple independent request cancellation. PDF extraction checks cumulative text length after each page and releases its worker immediately on rejection.
+
 ## Curated sample as a distinct mode
 
 The fictional sample and its answers are bundled and clearly labeled. Arbitrary questions or user documents never receive sample output. The sample cannot silently substitute for a failed provider request. Live failures retain the user's input and show retryable errors.

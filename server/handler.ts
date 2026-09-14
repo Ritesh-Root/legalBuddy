@@ -3,6 +3,7 @@ import { AppError, errorResponse } from './errors.js';
 import { createGeminiGenerator, generateAnalysis, type GenerateText } from './provider.js';
 import { createRateLimiter } from './rate-limit.js';
 import { parseRequest, validateTransport } from './request.js';
+import { createInferenceGate } from './capacity.js';
 
 /** Dependency injection enables real HTTP-contract tests without external credentials. */
 export interface HandlerOptions {
@@ -14,8 +15,10 @@ export interface HandlerOptions {
 /** Return one Fetch-compatible handler for both Vercel and local development. */
 export function createHandler(options: HandlerOptions): (request: Request) => Promise<Response> {
   const rateLimit = options.rateLimit ?? createRateLimiter();
+  const withCapacity = createInferenceGate();
   return async (request) => {
     try {
+      request.signal.throwIfAborted();
       const url = new URL(request.url);
       if (
         (url.pathname === '/api/health' || url.pathname === '/healthz') &&
@@ -31,16 +34,22 @@ export function createHandler(options: HandlerOptions): (request: Request) => Pr
       validateTransport(request, options.origin);
       rateLimit(request.headers.get('x-vercel-forwarded-for')?.split(',')[0]?.trim() ?? 'local');
       const input = await parseRequest(request);
+      request.signal.throwIfAborted();
       if (!options.generate)
         throw new AppError(
           503,
           'AI_NOT_CONFIGURED',
           'Live AI is not configured yet. You can explore the sample agreement in the meantime.',
         );
-      const result = await generateAnalysis(input, options.generate);
+      const generate = options.generate;
+      const result = await withCapacity(() => generateAnalysis(input, generate, request.signal));
       return Response.json({ result }, { headers: { 'Cache-Control': 'no-store' } });
     } catch (error) {
-      const response = errorResponse(error);
+      const response = errorResponse(
+        request.signal.aborted
+          ? new AppError(499, 'REQUEST_CANCELLED', 'The request was cancelled.')
+          : error,
+      );
       if (response.status === 429) response.headers.set('Retry-After', '60');
       if (response.status === 405) response.headers.set('Allow', 'POST');
       return response;

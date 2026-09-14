@@ -7,7 +7,7 @@ import { AppError } from './errors.js';
 import { SYSTEM_INSTRUCTION, userPrompt } from './prompt.js';
 
 /** Injectable generation boundary keeps route and failure tests offline. */
-export type GenerateText = (request: AssistanceRequest) => Promise<string>;
+export type GenerateText = (request: AssistanceRequest, signal?: AbortSignal) => Promise<string>;
 
 /** Create a reusable SDK client without exposing its credential to the browser. */
 export function createGeminiGenerator(apiKey: string, model: string): GenerateText {
@@ -15,11 +15,12 @@ export function createGeminiGenerator(apiKey: string, model: string): GenerateTe
     apiKey,
     httpOptions: { timeout: 40_000, retryOptions: { attempts: 1 } },
   });
-  return async (request) => {
+  return async (request, signal) => {
     const result = await client.models.generateContent({
       model,
       contents: userPrompt(request),
       config: {
+        ...(signal ? { abortSignal: signal } : {}),
         systemInstruction: SYSTEM_INSTRUCTION,
         responseMimeType: 'application/json',
         responseJsonSchema: z.toJSONSchema(analysisSchema),
@@ -36,17 +37,21 @@ export function createGeminiGenerator(apiKey: string, model: string): GenerateTe
 export async function generateAnalysis(
   request: AssistanceRequest,
   generate: GenerateText,
+  signal?: AbortSignal,
 ): Promise<Analysis> {
+  signal?.throwIfAborted();
   let output: string;
   try {
-    output = await generate(request);
+    output = await generate(request, signal);
   } catch {
+    signal?.throwIfAborted();
     throw new AppError(
       502,
       'PROVIDER_UNAVAILABLE',
       'The AI provider is unavailable or timed out. Your document is still here; try again shortly.',
     );
   }
+  signal?.throwIfAborted();
   let raw: unknown;
   try {
     raw = JSON.parse(output);

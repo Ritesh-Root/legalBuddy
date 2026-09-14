@@ -7,7 +7,6 @@ import {
 import { useEffect, useRef, useState, type ReactElement } from 'react';
 import type { Analysis } from '../../domain/types';
 import type { Workspace } from './use-workspace';
-import { requestAssistance } from './client';
 import { SAMPLE_QUESTIONS, sampleAnswer } from './sample-answers';
 import { FindingList } from '../review/finding-list';
 import { SourcePanel, type SourceSelection } from '../review/source-panel';
@@ -35,7 +34,7 @@ export default function QuestionPanel({ workspace }: { workspace: Workspace }): 
     controller.current = pending;
     setBusy(true);
     try {
-      const result = await requestAssistance(
+      const result = await workspace.assist(
         {
           action: 'ask',
           document: workspace.document,
@@ -112,8 +111,9 @@ export default function QuestionPanel({ workspace }: { workspace: Workspace }): 
                   placeholder="e.g. What does this say about ending the agreement?"
                 />
                 <p className="small muted">
-                  Asking sends this question, your original document, and reader context to Google
-                  Gemini under your review consent.
+                  New answers send this question, your original document, and reader context to
+                  Google Gemini under your review consent. A recent identical answer may be reused
+                  within this workspace.
                 </p>
                 <button className="button primary" disabled={busy || question.trim().length < 8}>
                   {busy ? 'Reading for an answer…' : 'Ask about this document'}

@@ -44,6 +44,12 @@ describe('Gemini provider boundary', () => {
       generateAnalysis(request, createGeminiGenerator('test-key-not-a-secret', 'test-model')),
     ).rejects.toMatchObject({ code: 'INVALID_RESPONSE' });
   });
+  it('forwards the request signal to the SDK without adding retries', async () => {
+    mocks.generate.mockResolvedValue({ text: JSON.stringify(SAMPLE_ANALYSIS) });
+    const signal = new AbortController().signal;
+    await createGeminiGenerator('test-key-not-a-secret', 'gemini-2.5-flash')(request, signal);
+    expect(mocks.generate.mock.calls[0]).toMatchObject([{ config: { abortSignal: signal } }]);
+  });
   it('converts provider failures and malformed JSON into actionable public errors', async () => {
     await expect(
       generateAnalysis(request, () => Promise.reject(new Error('credential and stack details'))),

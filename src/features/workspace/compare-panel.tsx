@@ -7,7 +7,6 @@ import {
 import { useEffect, useRef, useState, type ReactElement } from 'react';
 import type { Workspace } from './use-workspace';
 import { MAX_DOCUMENT_CHARACTERS } from '../../domain/types';
-import { requestAssistance } from './client';
 import { AnalysisReport } from '../review/review-panel';
 import { readDocumentFile } from '../documents/file-reader';
 
@@ -27,7 +26,7 @@ export default function ComparePanel({ workspace }: { workspace: Workspace }): R
     setBusy(true);
     setError('');
     try {
-      const result = await requestAssistance(
+      const result = await workspace.assist(
         {
           action: 'compare',
           document: workspace.document,

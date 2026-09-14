@@ -83,11 +83,11 @@ Production uses Vercel with `GEMINI_API_KEY` in the project's production environ
 
 `npm run verify` runs lint, strict type checking, measured coverage, the production client/API build, an emitted-Node runtime smoke test, and formatting. `npm run test:e2e` runs desktop/mobile journeys and axe accessibility checks. Install Chromium with `npx playwright install chromium`, or set `PLAYWRIGHT_CHANNEL=chrome` to use installed Chrome. `npm run preflight` checks tracked-file size, branch count, secret signatures, and submission documentation. CI runs these checks and dependency audits on every push.
 
-Measured on 13 September 2026:
+Measured on 14 September 2026:
 
-- 27 unit/API tests passed, including input limits, consent, origin handling, rate limits, provider failures, exact source matching, and property-based Unicode normalization.
-- Server/domain coverage: **100% lines (128/128)**, **100% statements/functions**, **93.93% branches (93/99)**. This is the configured server/domain scope in [vitest.config.ts](vitest.config.ts), not UI coverage.
-- 16 E2E tests passed across desktop and mobile, including local PDF extraction/rejection, cancelled-request recovery, tab draft retention, escaped model output, comparison, questions, export, keyboard navigation, and axe scans.
+- 41 unit/API tests passed, including input limits, consent, origin handling, rate and concurrency limits, cancellation, private result reuse, safe Markdown export, PDF extraction budgets, provider failures, exact source matching, and property-based Unicode normalization.
+- Server/domain coverage: **100% lines (145/145)**, **100% statements/functions**, **94.28% branches (99/105)**. This is the configured server/domain scope in [vitest.config.ts](vitest.config.ts), not UI coverage.
+- 18 E2E tests passed across desktop and mobile, including local PDF extraction/rejection, cancelled-request recovery, private result reuse/reset, tab draft retention, escaped model output, comparison, questions, export, keyboard navigation, and axe scans.
 - Production and full-tree dependency audits reported zero vulnerabilities.
 - The deployed Gemini review, comparison, and Q&A all passed schema and exact-source checks. Health returned `200` with `aiConfigured: true`; method errors and static policy files returned their expected response bodies. A production browser inspection found no console errors or CSP violations.
 
@@ -95,11 +95,13 @@ Measured on 13 September 2026:
 
 ## Security
 
-API keys are server-only. Input and output are validated; document instructions are untrusted. No document bodies are logged or persisted by the app. AI processing sends extracted text to the configured provider after consent.
+API keys are server-only. Input and output are validated; document instructions are untrusted. No document bodies are logged or persisted by the app. AI processing sends extracted text to the configured provider after consent. Downloaded briefs encode untrusted Markdown syntax, while the app displays model output as React text. CI actions are pinned to commit hashes; a checksum-verified Gitleaks scan checks the full Git history with redacted findings.
 
 ## Performance
 
-Static application assets use compression and immutable caching for hashed files. PDF parsing and workspace panels load lazily. A request processes at most two 40,000-character documents with a 40-second provider timeout and 5,000 output tokens; requests are not retried automatically. Local extraction and brief generation need no provider call.
+Static application assets use compression and immutable caching for hashed files. PDF parsing and workspace panels load lazily; PDF extraction stops as soon as the text budget is exceeded. A request processes at most two 40,000-character documents with a 40-second provider timeout and 5,000 output tokens; requests are not retried automatically. Each warm function instance permits at most three simultaneous generations. Local extraction and brief generation need no provider call.
+
+Successful, identical requests can reuse one of at most eight results within the current workspace for five minutes. The complete document, revision, question, context, action, and consent form the key. Clearing or leaving the workspace clears reuse; failed and aborted results are not stored. There is no shared server cache or browser persistence. Request cancellation propagates to the Gemini SDK, but cannot guarantee that provider processing or billing stops. See [security and efficiency verification](docs/verification.md) for measured savings and regression evidence.
 
 Lighthouse 13.4.1 measured the production landing page on 13 September 2026: **Performance 98, Accessibility 100, Best Practices 100, SEO 100** (mobile simulation). These are a single lab run, not a guarantee across devices or networks. The three live sample API calls took approximately 8.2 seconds for review, 12.4 seconds for comparison, and 3.9 seconds for Q&A in the verified run; provider latency varies.
 

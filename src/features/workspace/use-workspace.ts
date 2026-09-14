@@ -8,10 +8,11 @@ import {
   SAMPLE_DOCUMENT,
   SAMPLE_REVISED,
 } from '../../domain/sample';
-import { requestAssistance } from './client';
+import { createSessionClient, type SessionClient } from './session-client';
 
 /** Shared workspace state never uses localStorage, cookies, or a document database. */
 export function useWorkspace(): Workspace {
+  const [assistance] = useState(() => createSessionClient());
   const [sessionKey, setSessionKey] = useState(0);
   const [tab, setTab] = useState<WorkspaceTab>('review');
   const [document, setDocument] = useState('');
@@ -28,9 +29,16 @@ export function useWorkspace(): Workspace {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const controller = useRef<AbortController | null>(null);
-  useEffect(() => () => controller.current?.abort(), []);
+  useEffect(
+    () => () => {
+      controller.current?.abort();
+      assistance.clear();
+    },
+    [assistance],
+  );
 
   function clear(): void {
+    assistance.clear();
     setSessionKey((value) => value + 1);
     controller.current?.abort();
     controller.current = null;
@@ -64,7 +72,7 @@ export function useWorkspace(): Workspace {
     setBusy(true);
     setError('');
     try {
-      const result = await requestAssistance(
+      const result = await assistance.request(
         {
           action: 'review',
           document: text,
@@ -92,6 +100,7 @@ export function useWorkspace(): Workspace {
   }
 
   return {
+    assist: assistance.request,
     sessionKey,
     tab,
     setTab,
@@ -114,6 +123,7 @@ export function useWorkspace(): Workspace {
 
 /** One explicit state contract keeps panels aligned with the workspace owner. */
 export interface Workspace {
+  assist: SessionClient['request'];
   sessionKey: number;
   tab: WorkspaceTab;
   setTab: (tab: WorkspaceTab) => void;

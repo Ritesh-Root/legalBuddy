@@ -25,12 +25,12 @@ export function Sidebar({ workspace }: { workspace: Workspace }): ReactElement {
     <aside className="sidebar">
       <button
         className="brand-link"
-        aria-label="Margin home"
+        aria-label="legalBuddy home"
         onClick={() => workspace.setTab('review')}
       >
         <Brand />
       </button>
-      <p className="sidebar-caption">A little clarity goes a long way.</p>
+      <p className="sidebar-caption">AI for Legal Assistance &amp; Access</p>
       <button className="button new-document" onClick={workspace.clear}>
         <Plus size={17} aria-hidden="true" /> New document
       </button>
@@ -70,7 +70,7 @@ export function Sidebar({ workspace }: { workspace: Workspace }): ReactElement {
           Built in the open <ArrowSquareOut size={14} aria-hidden="true" />
         </a>
         <div className="sidebar-footer">
-          <span>LEGAL CLARITY, FOR EVERYONE</span>
+          <span>HACK2SKILL · PROMPTWARS</span>
           <span>V 1.0</span>
         </div>
       </div>

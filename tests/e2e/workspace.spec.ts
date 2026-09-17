@@ -52,7 +52,7 @@ test('sample journey connects findings, changed clauses, questions and the downl
   await expect(page.getByRole('heading', { name: 'Your legal conversation brief' })).toBeVisible();
   const download = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Download brief' }).click();
-  expect((await download).suggestedFilename()).toBe('margin-lawyer-brief.md');
+  expect((await download).suggestedFilename()).toBe('legalbuddy-lawyer-brief.md');
   await accessible(page);
   await page.getByRole('button', { name: 'New document', exact: true }).click();
   await expect(page.getByLabel('Paste your document', { exact: true })).toHaveValue('');

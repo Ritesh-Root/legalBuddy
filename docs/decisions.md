@@ -2,7 +2,7 @@
 
 ## One small workspace
 
-The brief calls for practical legal assistance. Margin follows one document through review, comparison, questions, and a lawyer briefing. A single React workspace avoids a generic chatbot landing page and keeps the source available. Each panel is a separate feature module.
+The brief calls for practical legal assistance. legalBuddy follows one document through review, comparison, questions, and a lawyer briefing. A single React workspace avoids a generic chatbot landing page and keeps the source available. Each panel is a separate feature module.
 
 ## Static client and Fetch-compatible API
 

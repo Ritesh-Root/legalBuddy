@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Evidence-grounded AI for Legal Assistance & Access: understand, compare, and navigate legal documents.",
+  "description": "legalBuddy — evidence-grounded AI for Legal Assistance & Access: understand, compare, and navigate legal documents.",
   "license": "MIT",
   "engines": {
     "node": "24.x"

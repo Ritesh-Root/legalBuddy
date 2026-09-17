@@ -21,12 +21,27 @@ const evidence = {
   source: z.enum(['original', 'revised']),
 };
 
+/** Explanations may be localized; source quotations stay in the document’s language. */
+export const explanationLanguages = [
+  'English',
+  'Hindi',
+  'Tamil',
+  'Telugu',
+  'Bengali',
+  'Marathi',
+  'Kannada',
+  'Malayalam',
+  'Gujarati',
+  'Punjabi',
+] as const;
+
 /** User-provided context remains data, never system instructions. */
 export const contextSchema = z
   .object({
     role: z.enum(['Freelancer', 'Tenant', 'Employee', 'Small business', 'Other']),
     jurisdiction: z.string().trim().max(100),
     concern: z.string().trim().max(400),
+    language: z.enum(explanationLanguages).default('English'),
   })
   .strict();
 

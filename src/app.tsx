@@ -73,7 +73,7 @@ export function App(): ReactElement {
     return () => controller.abort();
   }, []);
   useEffect(() => {
-    document.title = `${titles[workspace.tab]} · Margin`;
+    document.title = `${titles[workspace.tab]} · legalBuddy`;
   }, [workspace.tab]);
 
   return (

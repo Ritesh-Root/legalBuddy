@@ -10,6 +10,13 @@ import {
 } from '../../domain/sample';
 import { createSessionClient, type SessionClient } from './session-client';
 
+const EMPTY_CONTEXT: ReaderContext = {
+  role: 'Freelancer',
+  jurisdiction: '',
+  concern: '',
+  language: 'English',
+};
+
 /** Shared workspace state never uses localStorage, cookies, or a document database. */
 export function useWorkspace(): Workspace {
   const [assistance] = useState(() => createSessionClient());
@@ -17,13 +24,11 @@ export function useWorkspace(): Workspace {
   const [tab, setTab] = useState<WorkspaceTab>('review');
   const [document, setDocument] = useState('');
   const [name, setName] = useState('Your document');
-  const [context, setContext] = useState<ReaderContext>({
-    role: 'Freelancer',
-    jurisdiction: '',
-    concern: '',
-  });
+  const [context, setContext] = useState<ReaderContext>(EMPTY_CONTEXT);
   const [analysis, setAnalysis] = useState<Analysis | null>(null);
   const [comparison, setComparison] = useState<Analysis | null>(null);
+  const [questionText, setQuestionText] = useState('');
+  const [questionAnswer, setQuestionAnswer] = useState<Analysis | null>(null);
   const [revised, setRevised] = useState('');
   const [sample, setSample] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -46,12 +51,14 @@ export function useWorkspace(): Workspace {
     setRevised('');
     setAnalysis(null);
     setComparison(null);
+    setQuestionText('');
+    setQuestionAnswer(null);
     setSample(false);
     setBusy(false);
     setError('');
     setTab('review');
     setName('Your document');
-    setContext({ role: 'Freelancer', jurisdiction: '', concern: '' });
+    setContext(EMPTY_CONTEXT);
   }
 
   function exploreSample(): void {
@@ -88,6 +95,8 @@ export function useWorkspace(): Workspace {
       setName(title);
       setContext(reader);
       setAnalysis(result);
+      setQuestionText('');
+      setQuestionAnswer(null);
       setTab('review');
     } catch (failure) {
       if (!pending.signal.aborted)
@@ -110,6 +119,12 @@ export function useWorkspace(): Workspace {
     analysis,
     comparison,
     setComparison,
+    questionText,
+    questionAnswer,
+    setQuestionResult(question: string, answer: Analysis) {
+      setQuestionText(question);
+      setQuestionAnswer(answer);
+    },
     revised,
     setRevised,
     sample,
@@ -133,6 +148,9 @@ export interface Workspace {
   analysis: Analysis | null;
   comparison: Analysis | null;
   setComparison: (analysis: Analysis) => void;
+  questionText: string;
+  questionAnswer: Analysis | null;
+  setQuestionResult: (question: string, answer: Analysis) => void;
   revised: string;
   setRevised: (text: string) => void;
   sample: boolean;

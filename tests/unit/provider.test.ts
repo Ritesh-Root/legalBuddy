@@ -120,6 +120,8 @@ describe('Gemini provider boundary', () => {
     expect(userPrompt(hostile)).not.toContain('hidden revision');
     expect(userPrompt(hostile)).not.toContain('hidden question');
     expect(SYSTEM_INSTRUCTION).toContain('UNTRUSTED DATA');
+    expect(SYSTEM_INSTRUCTION).toContain('reader.language');
+    expect(SYSTEM_INSTRUCTION).toContain('never translate');
     expect(userPrompt({ ...hostile, action: 'compare' })).toContain('hidden revision');
     expect(userPrompt({ ...hostile, action: 'ask' })).toContain('hidden question');
   });

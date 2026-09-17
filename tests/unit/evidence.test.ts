@@ -14,7 +14,7 @@ import {
   SAMPLE_DOCUMENT,
   SAMPLE_REVISED,
 } from '../../src/domain/sample';
-import { requestSchema, type AssistanceRequest } from '../../src/domain/types';
+import { contextSchema, requestSchema, type AssistanceRequest } from '../../src/domain/types';
 import { createBrief } from '../../src/domain/brief';
 
 const request: AssistanceRequest = {
@@ -115,6 +115,14 @@ describe('input contracts', () => {
         .success,
     ).toBe(true);
   });
+  it('defaults explanation language to English and rejects unknown languages', () => {
+    const { language, ...withoutLanguage } = SAMPLE_CONTEXT;
+    expect(language).toBe('English');
+    expect(contextSchema.parse(withoutLanguage).language).toBe('English');
+    expect(contextSchema.safeParse({ ...SAMPLE_CONTEXT, language: 'Klingon' }).success).toBe(
+      false,
+    );
+  });
 });
 
 describe('portable lawyer brief', () => {
@@ -129,11 +137,28 @@ describe('portable lawyer brief', () => {
   it('labels actual AI output and discloses missing reader context', () => {
     const brief = createBrief(
       SAMPLE_ANALYSIS,
-      { role: 'Tenant', jurisdiction: '', concern: '' },
+      { role: 'Tenant', jurisdiction: '', concern: '', language: 'English' },
       false,
     );
     expect(brief).not.toContain('SAMPLE WALKTHROUGH');
     expect(brief).toContain('Not specified');
     expect(brief).toContain('General understanding');
+    expect(brief).toContain('Explain in: English');
+  });
+  it('includes comparison and Q&A from the same workspace', () => {
+    const brief = createBrief(SAMPLE_ANALYSIS, SAMPLE_CONTEXT, true, {
+      comparison: SAMPLE_COMPARISON,
+      question: 'Can I show this in my portfolio?',
+      answer: {
+        ...SAMPLE_ANALYSIS,
+        answer: 'Portfolio use requires written consent.',
+        findings: SAMPLE_ANALYSIS.findings.slice(0, 1),
+      },
+    });
+    expect(brief).toContain('Version comparison');
+    expect(brief).toContain(SAMPLE_COMPARISON.summary.slice(0, 40));
+    expect(brief).toContain('Question asked');
+    expect(brief).toContain('Can I show this in my portfolio?');
+    expect(brief).toContain('Portfolio use requires written consent');
   });
 });

@@ -1,10 +1,10 @@
-# Margin
+# legalBuddy
 
 Make sense of the fine print. An evidence-grounded assistant for **AI for Legal Assistance & Access**.
 
 ## Live Demo
 
-[Open Margin](https://margin-legal-assistant.vercel.app) · [Public repository](https://github.com/Ritesh-Root/legalBuddy)
+[Open legalBuddy](https://margin-legal-assistant.vercel.app) · [Public repository](https://github.com/Ritesh-Root/legalBuddy)
 
 The guided sample requires no API key. Live analysis uses a server-side Gemini key and displays an explicit unavailable state if it is not configured.
 
@@ -22,12 +22,12 @@ For live inference, click **New document**, paste or upload readable agreement t
 
 | ID  | Requirement                                               | Implementation                                                               |
 | --- | --------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| R1  | Simplifying complex legal documents                       | Plain-language review with verified source quotations                        |
+| R1  | Simplifying complex legal documents                       | Plain-language review in English or an Indian language, with verified source quotations |
 | R2  | Comparing contracts, agreements, or policies              | Original/revised analysis with explicit source labels                        |
 | R3  | Highlighting clauses, obligations, risks, inconsistencies | Prioritized findings and obligation checklist                                |
 | R4  | Answering questions based on documents                    | Grounded Q&A with evidence and uncertainty                                   |
 | R5  | Helping users understand options and next steps           | Context-aware questions and preparation steps                                |
-| R6  | Generating actionable outputs                             | Downloadable Markdown lawyer briefing                                        |
+| R6  | Generating actionable outputs                             | Downloadable Markdown lawyer briefing, including comparison and Q&A from this workspace |
 | R7  | Assistance rather than professional legal advice          | Clear scope notice, no enforceability verdicts, missing information surfaced |
 
 ## Chosen Vertical
@@ -40,7 +40,7 @@ Validate input, attach reader context, request structured model output, verify q
 
 ## How the Solution Works
 
-Add a document, set your role and jurisdiction, consent to AI processing, and start a review. Explore findings, compare a revision, ask a question, and prepare a downloadable brief.
+Add a document, set your role, jurisdiction, and explanation language, consent to AI processing, and start a review. Explore findings, compare a revision, ask a question, and prepare a downloadable brief. Quotations stay in the document’s original wording.
 
 ## Assumptions Made
 

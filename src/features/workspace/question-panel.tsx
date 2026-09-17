@@ -5,7 +5,6 @@ import {
   QuotesIcon as Quotes,
 } from '@phosphor-icons/react';
 import { useEffect, useRef, useState, type ReactElement } from 'react';
-import type { Analysis } from '../../domain/types';
 import type { Workspace } from './use-workspace';
 import { SAMPLE_QUESTIONS, sampleAnswer } from './sample-answers';
 import { FindingList } from '../review/finding-list';
@@ -14,8 +13,8 @@ import { SourcePanel, type SourceSelection } from '../review/source-panel';
 /** Only selected guided questions receive curated answers when the sample is active. */
 export default function QuestionPanel({ workspace }: { workspace: Workspace }): ReactElement {
   const [question, setQuestion] = useState('');
-  const [answeredQuestion, setAnsweredQuestion] = useState('');
-  const [answer, setAnswer] = useState<Analysis | null>(null);
+  const answeredQuestion = workspace.questionText;
+  const answer = workspace.questionAnswer;
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [selected, setSelected] = useState<SourceSelection>({ quote: '', source: 'original' });
@@ -26,8 +25,7 @@ export default function QuestionPanel({ workspace }: { workspace: Workspace }): 
     setQuestion(prompt);
     setError('');
     if (workspace.sample) {
-      setAnsweredQuestion(prompt);
-      setAnswer(sampleAnswer(prompt));
+      workspace.setQuestionResult(prompt, sampleAnswer(prompt));
       return;
     }
     const pending = new AbortController();
@@ -46,8 +44,7 @@ export default function QuestionPanel({ workspace }: { workspace: Workspace }): 
         pending.signal,
       );
       if (!pending.signal.aborted) {
-        setAnswer(result);
-        setAnsweredQuestion(prompt);
+        workspace.setQuestionResult(prompt, result);
       }
     } catch (failure) {
       if (!pending.signal.aborted)

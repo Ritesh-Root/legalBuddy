@@ -46,6 +46,7 @@ export const SAMPLE_CONTEXT: ReaderContext = {
   role: 'Freelancer',
   jurisdiction: 'India · state not specified',
   concern: 'Getting paid and protecting ownership of my work.',
+  language: 'English',
 };
 
 /** Curated findings use exact quotations from the fictional sample. */

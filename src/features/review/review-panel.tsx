@@ -4,7 +4,7 @@ import {
   CheckCircleIcon as CheckCircle,
   InfoIcon as Info,
 } from '@phosphor-icons/react';
-import { useState, type ReactElement } from 'react';
+import { useState, type CSSProperties, type ReactElement } from 'react';
 import type { Analysis } from '../../domain/types';
 import type { Workspace } from '../workspace/use-workspace';
 import { FindingList } from './finding-list';
@@ -22,9 +22,18 @@ export function AnalysisReport({
   revised?: string;
 }): ReactElement {
   const [selected, setSelected] = useState<SourceSelection>({ quote: '', source: 'original' });
+  const priority = analysis.findings.filter((finding) => finding.attention === 'priority').length;
+  const progress = analysis.findings.length
+    ? Math.max(0.12, priority / analysis.findings.length)
+    : 0.12;
   return (
-    <div className="report-grid">
-      <div className="report-content">
+    <div className="board report-board">
+      <section className="board-col" aria-label="Open">
+        <h2>Open</h2>
+        <FindingList analysis={analysis} onSelect={setSelected} />
+      </section>
+      <section className="board-col" aria-label="Description">
+        <h2>Description</h2>
         <div className="overview">
           <span className="eyebrow">THE SHORT VERSION</span>
           <h2>{analysis.title}</h2>
@@ -33,8 +42,34 @@ export function AnalysisReport({
             <CheckCircle size={17} aria-hidden="true" /> Quotations matched to source text
           </div>
         </div>
-        <FindingList analysis={analysis} onSelect={setSelected} />
+        <SourcePanel
+          document={document}
+          revised={revised}
+          selected={selected}
+          onSelect={setSelected}
+        />
+      </section>
+      <section className="board-col status-col" aria-label="Status">
+        <h2>Status</h2>
+        <article className="status-widget">
+          <p className="status-kicker">In progress</p>
+          <div className="status-ring" style={{ '--progress': String(progress) } as CSSProperties}>
+            <strong>{priority}</strong>
+            <span>to discuss first</span>
+          </div>
+          <p className="status-due">
+            {analysis.findings.length} points · {analysis.obligations.length} commitments
+          </p>
+        </article>
         <Obligations analysis={analysis} onSelect={setSelected} />
+        <section className="next-steps">
+          <h2>Useful next steps</h2>
+          <ul>
+            {analysis.nextSteps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ul>
+        </section>
         <section className="uncertainty">
           <h2>
             <Info size={19} aria-hidden="true" /> What this review can’t establish
@@ -49,13 +84,7 @@ export function AnalysisReport({
             important decisions with a qualified lawyer.
           </p>
         </section>
-      </div>
-      <SourcePanel
-        document={document}
-        revised={revised}
-        selected={selected}
-        onSelect={setSelected}
-      />
+      </section>
     </div>
   );
 }

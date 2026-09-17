@@ -1,16 +1,24 @@
-/* Shared visual tokens, typography, controls, and the responsive workspace shell. */
+/* Lavender dashboard: soft canvas, white cards, periwinkle accent. */
 :root {
   font-family: 'DM Sans', sans-serif;
-  color: #263a31;
-  background: #fcfcf9;
+  color: var(--ink);
+  background: var(--canvas);
   font-synthesis: none;
   font-weight: 400;
-  --green: #245440;
-  --green-dark: #193d2f;
-  --muted: #59684d;
-  --line: #e0e5dc;
+  -webkit-font-smoothing: antialiased;
+  --ink: #2f2b5c;
+  --green: #5b54d6;
+  --green-dark: #4338ca;
+  --muted: #4f4b76;
+  --line: #6f6c96;
   --paper: #fff;
-  --sage: #edf2e9;
+  --sage: #eceafb;
+  --canvas: #eef0fa;
+  --shell: #f6f7fc;
+  --highlight: #dcd9f8;
+  --accent: #5b54d6;
+  --sky: #6b8cff;
+  --sky-soft: #e8f0ff;
 }
 * {
   box-sizing: border-box;
@@ -18,6 +26,7 @@
 body {
   margin: 0;
   min-width: 320px;
+  background: var(--canvas);
 }
 button,
 input,
@@ -54,13 +63,13 @@ a {
   touch-action: manipulation;
 }
 :focus-visible {
-  outline: 3px solid #46724a;
-  outline-offset: 4px;
-  border-radius: 3px;
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 ::selection {
-  background: #dce8bd;
-  color: #193d2f;
+  background: var(--highlight);
+  color: var(--ink);
 }
 h1,
 h2,
@@ -69,11 +78,10 @@ p {
   margin-top: 0;
 }
 h1 {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(40px, 4.4vw, 62px);
-  line-height: 1.1;
-  letter-spacing: -0.025em;
+  font-weight: 700;
+  font-size: clamp(36px, 4.2vw, 52px);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
 }
 h2 {
   font-size: 21px;
@@ -92,16 +100,19 @@ svg {
 }
 .app-shell {
   display: grid;
-  grid-template-columns: 234px minmax(0, 1fr);
+  grid-template-columns: 228px minmax(0, 1fr);
   min-height: 100dvh;
+  padding: 14px;
+  gap: 14px;
+  background: radial-gradient(1200px 500px at 80% -10%, #dfe4ff 0%, transparent 55%), var(--canvas);
 }
 .sidebar {
-  background: #f0f3ed;
-  border-right: 1px solid var(--line);
-  padding: 33px 20px 22px;
-  height: 100dvh;
+  background: transparent;
+  border-right: 0;
+  padding: 12px 8px 8px;
+  height: calc(100dvh - 32px);
   position: sticky;
-  top: 0;
+  top: 16px;
   display: flex;
   flex-direction: column;
 }
@@ -116,21 +127,24 @@ svg {
   text-align: left;
 }
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 35px;
-  font-weight: 600;
-  letter-spacing: -1.6px;
+  display: grid;
+  gap: 6px;
+}
+.brand-logo {
+  display: block;
+  width: 132px;
+  height: auto;
+  background: #fff;
+  padding: 8px 10px;
+  border-radius: 12px;
+}
+.brand-product {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
 }
 .brand-mark {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 39px;
-  color: white;
-  background: var(--green);
-  border-radius: 10px 3px 10px 3px;
+  display: none;
 }
 .brand-period {
   color: #59684d;
@@ -147,7 +161,7 @@ svg {
   gap: 10px;
   border: 1px solid var(--line);
   padding: 12px 17px;
-  border-radius: 7px;
+  border-radius: 14px;
   font-size: 13px;
   font-weight: 500;
   min-height: 43px;
@@ -163,8 +177,8 @@ svg {
 }
 .button.primary {
   color: white;
-  background: var(--green);
-  border-color: var(--green);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 .button.primary:hover:not(:disabled) {
   background: var(--green-dark);
@@ -216,12 +230,13 @@ svg {
   min-height: 44px;
 }
 .navigation button:hover {
-  background: #e5ece0;
+  background: #e4e2f4;
 }
 .navigation button[aria-current] {
-  background: #dfe8d7;
-  color: #244833;
-  font-weight: 600;
+  background: #e8e6fa;
+  color: var(--ink);
+  font-weight: 700;
+  border-radius: 16px;
 }
 .nav-dot,
 .status-dot {
@@ -233,6 +248,19 @@ svg {
 }
 .nav-dot {
   margin-left: auto;
+}
+.nav-count {
+  margin-left: auto;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  display: inline-grid;
+  place-items: center;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 .sidebar-bottom {
   margin-top: auto;
@@ -283,15 +311,21 @@ svg {
   min-width: 0;
   display: flex;
   flex-direction: column;
+  background: var(--shell);
+  border-radius: 32px;
+  box-shadow:
+    0 0 0 1px oklch(0 0 0 / 0.06),
+    0 1px 2px -1px oklch(0 0 0 / 0.06),
+    0 2px 4px 0 oklch(0 0 0 / 0.04);
 }
 .topbar {
-  min-height: 76px;
-  border-bottom: 1px solid var(--line);
+  min-height: 64px;
+  border-bottom: 1px solid var(--hairline, #d9d0c2);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 43px;
-  font-size: 11px;
+  padding: 0 36px;
+  font-size: 12px;
 }
 .topbar > div {
   display: flex;
@@ -407,15 +441,26 @@ svg {
   border: 0;
 }
 .skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}
+.skip-link:focus,
+.skip-link:focus-visible {
   position: fixed;
-  top: -70px;
+  width: auto;
+  height: auto;
+  clip: auto;
+  clip-path: none;
+  top: 16px;
   left: 20px;
   padding: 12px 20px;
   z-index: 20;
-  background: white;
-}
-.skip-link:focus {
-  top: 15px;
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--line);
 }
 .recovery {
   padding: 60px;

@@ -13,7 +13,7 @@ function downloadBrief(content: string): void {
   const url = URL.createObjectURL(new Blob([content], { type: 'text/markdown;charset=utf-8' }));
   const anchor = document.createElement('a');
   anchor.href = url;
-  anchor.download = 'margin-lawyer-brief.md';
+  anchor.download = 'legalbuddy-lawyer-brief.md';
   anchor.click();
   setTimeout(() => URL.revokeObjectURL(url), 1_000);
 }
@@ -36,7 +36,15 @@ export default function BriefPanel({
         </div>
         <button
           className="button primary"
-          onClick={() => downloadBrief(createBrief(analysis, workspace.context, workspace.sample))}
+          onClick={() =>
+            downloadBrief(
+              createBrief(analysis, workspace.context, workspace.sample, {
+                comparison: workspace.comparison,
+                question: workspace.questionText,
+                answer: workspace.questionAnswer,
+              }),
+            )
+          }
         >
           <DownloadSimple size={18} aria-hidden="true" /> Download brief
         </button>
@@ -44,7 +52,7 @@ export default function BriefPanel({
       <div className="brief-grid">
         <article className="brief-paper">
           <div className="brief-paper-heading">
-            <span className="eyebrow">MARGIN / PREPARATION NOTES</span>
+            <span className="eyebrow">LEGALBUDDY / PREPARATION NOTES</span>
             <NotePencil size={28} weight="light" aria-hidden="true" />
           </div>
           <h2>Your legal conversation brief</h2>
@@ -60,6 +68,10 @@ export default function BriefPanel({
             <div>
               <span>Jurisdiction</span>
               <strong>{workspace.context.jurisdiction || 'Not specified'}</strong>
+            </div>
+            <div>
+              <span>Explain in</span>
+              <strong>{workspace.context.language}</strong>
             </div>
             <div>
               <span>Main concern</span>
@@ -112,8 +124,8 @@ export default function BriefPanel({
             </button>
           </section>
           <p className="muted small">
-            Your download includes the review, source quotations, obligations, and missing
-            information. It is created on your device.
+            Your download includes the review, source quotations, obligations, missing information,
+            and any comparison or question from this workspace. It is created on your device.
           </p>
         </aside>
       </div>

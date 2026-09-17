@@ -1,17 +1,18 @@
-/** Consistent wordmark and graphic glyphs for the reading workspace. */
-import { BookOpenTextIcon as BookOpenText } from '@phosphor-icons/react';
+/** Hack2skill wordmark plus the legalBuddy product name. */
 import type { ReactElement } from 'react';
 
-/** The book symbol reinforces the app's role as a reader, not a legal authority. */
+/** Contest host mark sits above the product so the workspace stays identifiable. */
 export function Brand(): ReactElement {
   return (
     <div className="brand">
-      <span className="brand-mark">
-        <BookOpenText size={25} weight="bold" aria-hidden="true" />
-      </span>
-      <span>
-        margin<span className="brand-period">.</span>
-      </span>
+      <img
+        className="brand-logo"
+        src="/brand/h2s-logo.svg"
+        width={132}
+        height={52}
+        alt="Hack2skill"
+      />
+      <span className="brand-product">legalBuddy</span>
     </div>
   );
 }

@@ -58,40 +58,6 @@
   color: #59684d;
   margin: 0 0 0 auto;
 }
-.folio-spread {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(240px, 0.85fr);
-  gap: 22px;
-  align-items: start;
-  margin-top: 8px;
-}
-.folio-label {
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--muted);
-  margin: 0 0 12px;
-}
-.tally {
-  background: #f7f1e6;
-  border-left: 3px solid var(--accent);
-  padding: 14px 16px;
-  margin-bottom: 14px;
-}
-.tally strong {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 36px;
-  font-weight: 400;
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-  margin-right: 8px;
-}
-.tally p {
-  margin: 0 0 6px;
-  color: var(--muted);
-  font-size: 13px;
-}
 .report-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
@@ -458,12 +424,10 @@
   border-radius: 5px;
 }
 @media (max-width: 1100px) {
-  .board,
-  .folio-spread {
+  .board {
     grid-template-columns: 1fr 1fr;
   }
-  .status-col,
-  .folio-dock {
+  .status-col {
     grid-column: 1 / -1;
   }
   .report-grid {
@@ -489,7 +453,6 @@
 }
 @media (max-width: 900px) {
   .board,
-  .folio-spread,
   .report-grid {
     grid-template-columns: 1fr;
   }

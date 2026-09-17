@@ -262,12 +262,6 @@
   stroke-width: 3.4;
   stroke-linecap: round;
 }
-.challenge-cloud {
-  width: 88px;
-  height: 88px;
-  object-fit: contain;
-  margin-bottom: 8px;
-}
 .challenge-label {
   font-size: 13px;
   color: var(--muted);
@@ -532,7 +526,6 @@
   max-width: 80px;
   margin-top: 4px;
 }
-.umbrella-art,
 .justice-art {
   display: block;
   width: min(100%, 180px);
@@ -812,8 +805,6 @@ input[type='checkbox'] {
   .board {
     grid-template-columns: 1fr;
   }
-  .challenge-cloud,
-  .umbrella-art,
   .justice-art {
     display: none;
   }

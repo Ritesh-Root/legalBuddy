@@ -22,9 +22,22 @@ Judges can use the sample with no API key: **Explore the sample** → ownership 
 ## Narrative
 
 1. Publish [docs/build-in-public.md](build-in-public.md) as a LinkedIn article, Hashnode, or Dev.to post. Put that URL in the form.
-2. Post [brag-output/share-copy.txt](../brag-output/share-copy.txt) on LinkedIn. Attach the video or the live URL.
+2. Post [brag-output/share-copy.txt](../brag-output/share-copy.txt) on LinkedIn. The 20s launch clip is `brag-output/brag.mp4` / `~/Downloads/legalBuddy-brag.mp4`.
 
-Optional Instagram reel (separate Prompt Credits bonus): the clip is 20s landscape. A 9:16 cut is not in this repo yet.
+Optional Instagram reel (separate Prompt Credits bonus): the 20s clip is landscape. A 9:16 cut is not in this repo yet.
+
+## Judge video checklist (85s cut)
+
+The submission walkthrough follows the Hack2skill Video Submission Guide:
+
+- Walkthrough of paste, review, quote jump, Q&A, Download brief
+- Live typing of a photography agreement (not the sample)
+- Edge cases: empty brief, rejected `.exe`, two-character paste
+- GenAI called out on **Make it clear** and **Ask about this document**
+- Two different Gemini answers on the same document
+- On-screen captions, no voiceover, 85 seconds (under 4 minutes)
+
+You still upload that file and paste a public Drive or YouTube link. Open the link in a private window before submitting.
 
 ## Gates already green
 

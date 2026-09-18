@@ -11,7 +11,7 @@ Official dual submission from [PromptWars Virtual](https://promptwars.in/promptw
 | ----------------- | ---------------------------------------------------------------------------- |
 | GitHub            | https://github.com/Ritesh-Root/legalBuddy                                    |
 | Live preview      | https://legalbuddy-app.vercel.app                                            |
-| Walkthrough video | `brag-output/brag.mp4` in that repo (also `~/Downloads/legalBuddy-brag.mp4`) |
+| Walkthrough video | **85s judge cut** (this is the form video): `~/Downloads/legalBuddy-submission.mp4` and `brag-output-2026-09-19-021758/brag.mp4` (untracked — over the 10 MB repo cap if committed). Upload to Drive (Anyone with the link) or YouTube, then paste that URL. |
 
 Do **not** submit:
 

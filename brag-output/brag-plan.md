@@ -15,7 +15,7 @@ Lavender canvas. Tiny eyebrow: **LESS LEGAL JARGON. MORE UNDERSTANDING.** Then t
 ## Key moments (the middle)
 
 - A freelancer agreement card appears. A cursor considers **Explore the sample**, then presses **Make it clear**.
-- The finding **You could hand over ownership before being paid** arrives. The source quote is highlighted in place: *All intellectual property rights in the deliverables transfer to the Client upon creation…*
+- The finding **You could hand over ownership before being paid** arrives. The source quote is highlighted in place: _All intellectual property rights in the deliverables transfer to the Client upon creation…_
 - Status chip: **Quotations matched to source text.**
 
 ## Outro / punchline
@@ -41,12 +41,12 @@ Landscape 1920×1080. **20.0 seconds.**
 
 ## Storyboard
 
-| Scene | Time | Visual | On-screen copy (verbatim) | Motion | SFX |
-| --- | --- | --- | --- | --- | --- |
-| 1 Hook | 0.0–4.2 | Lavender `#eef0fa`, radial periwinkle glow, ghost FINE PRINT, consult.jpg | LESS LEGAL JARGON. MORE UNDERSTANDING. / Before you sign. | Eyebrow fade, serif rise, art scale 1.04→1 | drop_001 on headline |
-| 2 Flow | 4.2–9.6 | Sidebar legalBuddy, sample agreement card, two CTAs | FREELANCE DESIGN AGREEMENT / Explore the sample / Make it clear | Card slide, cursor-click-ripple on Make it clear | click_002 |
-| 3 Quote | 9.6–15.8 | Finding card + highlighted source line | You could hand over ownership before being paid / All intellectual property rights in the deliverables transfer to the Client upon creation… / Quotations matched to source text | Spring-pop card, marker highlight scaleX | bong_001 |
-| 4 Outro | 15.8–20.0 | Brief button, wordmark, justice.jpg as small still | Download brief / legalBuddy / Information and preparation only. Not legal advice. | Soft scale-in wordmark | drop_003 |
+| Scene   | Time      | Visual                                                                    | On-screen copy (verbatim)                                                                                                                                                        | Motion                                           | SFX                  |
+| ------- | --------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------- |
+| 1 Hook  | 0.0–4.2   | Lavender `#eef0fa`, radial periwinkle glow, ghost FINE PRINT, consult.jpg | LESS LEGAL JARGON. MORE UNDERSTANDING. / Before you sign.                                                                                                                        | Eyebrow fade, serif rise, art scale 1.04→1       | drop_001 on headline |
+| 2 Flow  | 4.2–9.6   | Sidebar legalBuddy, sample agreement card, two CTAs                       | FREELANCE DESIGN AGREEMENT / Explore the sample / Make it clear                                                                                                                  | Card slide, cursor-click-ripple on Make it clear | click_002            |
+| 3 Quote | 9.6–15.8  | Finding card + highlighted source line                                    | You could hand over ownership before being paid / All intellectual property rights in the deliverables transfer to the Client upon creation… / Quotations matched to source text | Spring-pop card, marker highlight scaleX         | bong_001             |
+| 4 Outro | 15.8–20.0 | Brief button, wordmark, justice.jpg as small still                        | Download brief / legalBuddy / Information and preparation only. Not legal advice.                                                                                                | Soft scale-in wordmark                           | drop_003             |
 
 Scene durations: 4.2 + 5.4 + 6.2 + 4.2 = **20.0s**.
 

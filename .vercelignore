@@ -1,9 +1,11 @@
-.git
-.env*
+brag-output
+brag-output-*
 node_modules
 dist
 coverage
-artifacts
-test-results
 playwright-report
+test-results
+artifacts
 *.log
+.env*
+!.env.example

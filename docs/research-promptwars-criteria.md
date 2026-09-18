@@ -6,14 +6,14 @@ Six high-effort agents scored `/home/ritesh/margin-legal-assistant` against the 
 
 ## Scoreboard
 
-| Criterion | Impact | Prior in-repo | This audit | Agent |
-| --- | --- | --- | --- | --- |
-| Code Quality | High | 100 | **88** | reviewer |
-| Problem Statement Alignment | High | 100 | **87** | deep-researcher |
-| Security | Medium | 95 | **91** | security-auditor |
-| Efficiency | Medium | 85 | **89** | observability |
-| Testing | Low | 100 | **79** | tester |
-| Accessibility | Low | 100 | **83** | deep-researcher |
+| Criterion                   | Impact | Prior in-repo | This audit | Agent            |
+| --------------------------- | ------ | ------------- | ---------- | ---------------- |
+| Code Quality                | High   | 100           | **88**     | reviewer         |
+| Problem Statement Alignment | High   | 100           | **87**     | deep-researcher  |
+| Security                    | Medium | 95            | **91**     | security-auditor |
+| Efficiency                  | Medium | 85            | **89**     | observability    |
+| Testing                     | Low    | 100           | **79**     | tester           |
+| Accessibility               | Low    | 100           | **83**     | deep-researcher  |
 
 Weighted (H=3, M=2, L=1): **87 / 100**.
 
@@ -61,9 +61,9 @@ Margin is a strong contest submission: strict TypeScript, server-only Gemini, qu
 
 ## Evidence quality
 
-| Finding | Quality |
-| --- | --- |
-| Unit coverage 145/145, 41 tests | High (ran) |
-| Source security/a11y/alignment | High (read) |
-| E2E green / live Gemini | Medium / unverified |
-| Official PS document | Low (not fetched) |
+| Finding                         | Quality             |
+| ------------------------------- | ------------------- |
+| Unit coverage 145/145, 41 tests | High (ran)          |
+| Source security/a11y/alignment  | High (read)         |
+| E2E green / live Gemini         | Medium / unverified |
+| Official PS document            | Low (not fetched)   |

@@ -119,9 +119,7 @@ describe('input contracts', () => {
     const { language, ...withoutLanguage } = SAMPLE_CONTEXT;
     expect(language).toBe('English');
     expect(contextSchema.parse(withoutLanguage).language).toBe('English');
-    expect(contextSchema.safeParse({ ...SAMPLE_CONTEXT, language: 'Klingon' }).success).toBe(
-      false,
-    );
+    expect(contextSchema.safeParse({ ...SAMPLE_CONTEXT, language: 'Klingon' }).success).toBe(false);
   });
 });
 

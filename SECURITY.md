@@ -45,4 +45,4 @@ ESLint 9 is pinned because the current jsx-a11y release declares support through
 
 ## Limitations
 
-No OCR, authentication, encrypted document vault, legal research, or guarantee of privilege. Do not send confidential, personal, or sensitive documents. See the [processing notice](https://margin-legal-assistant.vercel.app/privacy.html) before a live review.
+No OCR, authentication, encrypted document vault, legal research, or guarantee of privilege. Do not send confidential, personal, or sensitive documents. See the [processing notice](https://legalbuddy-app.vercel.app/privacy.html) before a live review.

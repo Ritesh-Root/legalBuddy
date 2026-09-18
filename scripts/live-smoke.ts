@@ -5,7 +5,7 @@ import { analysisSchema, type AssistanceRequest } from '../src/domain/types';
 import { hasVerifiedEvidence } from '../src/domain/evidence';
 import { SAMPLE_CONTEXT, SAMPLE_DOCUMENT, SAMPLE_REVISED } from '../src/domain/sample';
 
-const base = process.env.E2E_BASE_URL ?? 'https://margin-legal-assistant.vercel.app';
+const base = process.env.E2E_BASE_URL ?? 'https://legalbuddy-app.vercel.app';
 const health = await fetch(`${base}/api/health`, { signal: AbortSignal.timeout(30_000) });
 assert.equal(health.status, 200, 'Deployed health must respond successfully');
 assert.deepEqual(await health.json(), { status: 'ok', aiConfigured: true });

@@ -4,48 +4,51 @@
 
 # legalBuddy
 
-Paste an agreement. legalBuddy explains the wording, shows the sentence it used, and writes a short brief you can take to a lawyer.
+You paste an agreement. legalBuddy tells you what the wording means, points at the sentence it used, and writes a short brief you can take to a lawyer.
 
-It does not look up statutes or tell you a clause is enforceable. Closing the tab clears the workspace.
+It will not look up statutes. It will not tell you a clause is enforceable. Close the tab and the workspace is gone.
 
 [Open the live app](https://legalbuddy-app.vercel.app) · [Repository](https://github.com/Ritesh-Root/legalBuddy) · [20-second walkthrough](brag-output/brag.mp4)
 
-Contest form fields and the 85-second judge video path live in [docs/submission.md](docs/submission.md).
+Hack2skill form fields and the 85-second judge video path are in [docs/submission.md](docs/submission.md).
 
 ## Try the sample
 
-The fictional freelancer agreement needs no API key.
+There is a fictional freelancer agreement in the app. You do not need an API key for it.
 
-1. Click **Explore the sample**.
+1. Click Explore the sample.
 2. Open the ownership finding and jump to the quote in the document.
-3. Compare versions. The revision shortens the payment window from 60 days to 15 and changes when ownership transfers.
-4. Ask **Can I show this in my portfolio?**
-5. Download the lawyer brief. It includes the review, the comparison, and that question.
+3. Compare versions. The revision cuts the payment window from 60 days to 15 and changes when ownership transfers.
+4. Ask "Can I show this in my portfolio?"
+5. Download the lawyer brief. That file includes the review, the comparison, and that question.
 
-For a live Gemini run, start a new document, paste or upload readable text, set your role and language, tick consent, then **Make it clear**. If no server key is configured, the app says so. It never substitutes the sample for a failed live call.
+For a live Gemini run, start a new document. Paste text or upload a readable file, set your role and language, tick consent, then click Make it clear. If the server has no key, the app says so. A failed live call never falls back to the sample.
 
 ## What you can do
 
-Review a contract in plain language, in English or Hindi, Tamil, Telugu, Bengali, Marathi, Kannada, Malayalam, Gujarati, or Punjabi. Quotations stay in the document's original wording so you can check them.
+Reviews come out in plain language. English is the default. You can also get explanations in Hindi, Tamil, Telugu, Bengali, Marathi, Kannada, Malayalam, Gujarati, or Punjabi. Quoted lines stay in whatever language the document used, so you can check them against the page.
 
-Compare an original and a revised draft. Each point is tied to one labeled source.
+You can compare an original draft with a revised one. Each point names which version it came from.
 
-Ask a question about the text you supplied. If the document does not say, the answer says that.
+You can ask a question about the text you supplied. If that text does not say, the answer says so.
 
-Export a Markdown brief on your device. No extra model call.
+You can export a Markdown brief on your own machine. That download does not call the model again.
 
-PDFs and text files are read in the browser. Only extracted text is sent to Gemini, and only after consent. There is no account and no document database. The workspace lives in memory for this visit.
+PDFs and text files are read in the browser. After you consent, only the extracted text goes to Gemini. There is no account and no document database. The workspace lives in memory for this visit.
 
 ## Limits
 
-- 2 MB per file, 30 PDF pages, 80 to 40,000 characters per document
-- Text-based PDFs only. Scans need OCR somewhere else
-- One in-memory workspace. Closing the tab clears it
-- Rate limits are per warm server instance, not a shared Redis store
+A file can be 2 MB. A PDF can be 30 pages. Each document must be between 80 and 40,000 characters.
+
+Only text-based PDFs work here. Scanned pages need OCR somewhere else.
+
+There is one in-memory workspace. Closing the tab clears it.
+
+Rate limits apply per warm server instance. They are not stored in a shared Redis.
 
 ## Run locally
 
-Node.js 24.
+You need Node.js 24.
 
 ```bash
 npm ci
@@ -53,7 +56,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Put `GEMINI_API_KEY` in `.env.local` for live analysis. Leave it empty to use the sample. Vite prints the local URL. The API listens on port 3001 behind the Vite proxy.
+Put `GEMINI_API_KEY` in `.env.local` if you want live analysis. Leave it empty if you only want the sample. Vite prints the local URL. The API listens on port 3001 behind the Vite proxy.
 
 On Vercel, set `GEMINI_API_KEY` in the project environment. `GEMINI_MODEL` defaults to `gemini-2.5-flash`.
 
@@ -67,7 +70,7 @@ npm run preflight # size, branch, secrets, and README gates
 
 Gemini returns JSON. Zod checks the shape. Every quotation is matched against the labeled source after Unicode and whitespace normalization. If a quote is not in the document, the whole response is thrown away.
 
-The model is instructed to treat the document as untrusted data, not as instructions. Findings sit beside the source so you can read the sentence yourself.
+The prompt treats the document as untrusted data, not as instructions. Findings sit next to the source so you can read the sentence yourself.
 
 ## Chosen Vertical
 
@@ -75,7 +78,7 @@ AI for Legal Assistance & Access. legalBuddy is for people who need to read an e
 
 ## Approach and Logic
 
-Validate the paste or upload, attach the reader's role, jurisdiction, concern, and explanation language, ask Gemini for structured JSON, then verify every quotation against the exact source. Unsupported evidence is discarded. The labeled sample is a separate path from live inference and is never used as a fallback.
+The app validates the paste or upload, attaches the reader's role, jurisdiction, concern, and explanation language, asks Gemini for structured JSON, then checks every quotation against the exact source. Quotes that do not match are discarded. The labeled sample is a separate path from live inference. The sample is never used as a fallback.
 
 ## How the Solution Works
 
@@ -117,12 +120,12 @@ Gemini runs only on the server. Quotes stay in the source language even when the
 
 ## Accessibility
 
-Skip link, semantic landmarks, labeled controls, visible keyboard focus, source navigation that moves focus into the quote, async status announcements, and a reduced-motion path. Playwright journeys include axe scans on desktop and a narrow viewport.
+There is a skip link, semantic landmarks, labeled controls, and a visible keyboard focus ring. Jumping to a quote moves focus into that sentence. Async work is announced to assistive tech. Motion can be reduced. Playwright journeys run axe on desktop and on a narrow viewport.
 
 ## Stack
 
 React, TypeScript, Vite, Zod, Gemini (`@google/genai`), Vercel, Vitest, Playwright, axe.
 
-Built for PromptWars, track **AI for Legal Assistance & Access**. Information and preparation, not legal advice.
+Built for PromptWars, track **AI for Legal Assistance & Access**. This is information and preparation. It is not legal advice.
 
 MIT. Ritesh.

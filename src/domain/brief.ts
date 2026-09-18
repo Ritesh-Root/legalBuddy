@@ -18,11 +18,11 @@ function findingLines(items: Analysis['findings'], start = 1): string[] {
 }
 
 /** Optional compare/Q&A results travel with the review so the download matches the workspace. */
-export type BriefExtras = {
+export interface BriefExtras {
   comparison?: Analysis | null;
   question?: string;
   answer?: Analysis | null;
-};
+}
 
 /** Encode untrusted values for downstream Markdown readers without changing source evidence. */
 export function createBrief(

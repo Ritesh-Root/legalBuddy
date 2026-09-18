@@ -8,7 +8,7 @@ Paste an agreement. legalBuddy explains the wording, shows the sentence it used,
 
 It does not look up statutes or tell you a clause is enforceable. Closing the tab clears the workspace.
 
-[Open the live app](https://legalbuddy-app.vercel.app) · [Repository](https://github.com/Ritesh-Root/legalBuddy)
+[Open the live app](https://legalbuddy-app.vercel.app) · [Repository](https://github.com/Ritesh-Root/legalBuddy) · [20-second walkthrough](brag-output/brag.mp4)
 
 ## Try the sample
 

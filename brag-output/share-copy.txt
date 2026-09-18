@@ -1,0 +1,6 @@
+legalBuddy: make sense of the fine print.
+
+Paste an agreement, jump to the sentence it used, and download a brief for a lawyer.
+
+Live: https://legalbuddy-app.vercel.app
+Code: https://github.com/Ritesh-Root/legalBuddy

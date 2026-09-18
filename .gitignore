@@ -10,3 +10,5 @@ artifacts/
 *.log
 *.tsbuildinfo
 .DS_Store
+brag-output/composition/
+brag-output/*.webm

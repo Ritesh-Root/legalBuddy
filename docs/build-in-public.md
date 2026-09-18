@@ -37,7 +37,7 @@ Click **Explore the sample**. Open **You could hand over ownership before being 
 
 Compare versions, ask **Can I show this in my portfolio?**, then **Download brief**. The file includes the review, the comparison, and that question.
 
-A 20-second walkthrough of that path is in the repository: `brag-output/brag.mp4`.
+A 20-second walkthrough of that path is in the repository: `brag-output/brag.mp4`. The Hack2skill form video is the 85-second live walkthrough at `~/Downloads/legalBuddy-submission.mp4`.
 
 ## Limits I am not hiding
 

@@ -10,6 +10,8 @@ It does not look up statutes or tell you a clause is enforceable. Closing the ta
 
 [Open the live app](https://legalbuddy-app.vercel.app) · [Repository](https://github.com/Ritesh-Root/legalBuddy) · [20-second walkthrough](brag-output/brag.mp4)
 
+Contest form fields and the 85-second judge video path live in [docs/submission.md](docs/submission.md).
+
 ## Try the sample
 
 The fictional freelancer agreement needs no API key.

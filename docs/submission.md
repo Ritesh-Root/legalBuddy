@@ -7,11 +7,12 @@ Official dual submission from [PromptWars Virtual](https://promptwars.in/promptw
 
 ## Technical
 
-| Field             | Use this                                                                     |
-| ----------------- | ---------------------------------------------------------------------------- |
-| GitHub            | https://github.com/Ritesh-Root/legalBuddy                                    |
-| Live preview      | https://legalbuddy-app.vercel.app                                            |
-| Walkthrough video | **85s judge cut** (this is the form video): `~/Downloads/legalBuddy-submission.mp4` and `brag-output-2026-09-19-021758/brag.mp4` (untracked — over the 10 MB repo cap if committed). Upload to Drive (Anyone with the link) or YouTube, then paste that URL. |
+| Field        | Use this                                  |
+| ------------ | ----------------------------------------- |
+| GitHub       | https://github.com/Ritesh-Root/legalBuddy |
+| Live preview | https://legalbuddy-app.vercel.app         |
+
+Walkthrough video: upload `~/Downloads/legalBuddy-submission.mp4` (85s judge cut) to Google Drive with **Anyone with the link**, or to YouTube. Open the link in a private window, then paste it. Do not commit that file — it would break the 10 MB contest size gate.
 
 Do **not** submit:
 
@@ -49,4 +50,5 @@ You still upload that file and paste a public Drive or YouTube link. Open the li
 ## You still do by hand
 
 - Publish the blog and the LinkedIn post, then paste those URLs into Hack2skill
+- Upload the 85s video and paste a public Drive or YouTube link
 - Confirm the form’s GitHub + live preview fields match the table above
